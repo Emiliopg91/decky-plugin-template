@@ -2,26 +2,28 @@ import { ButtonItem, Menu, MenuItem, Navigation, PanelSection, PanelSectionRow, 
 import { VFC } from "react"
 
 import logo from "../../assets/logo.png"
+import { Logger } from "../libraries/logger";
+import { Translator } from "../libraries/translator";
 
 export const MainMenu: VFC<{ serverAPI: ServerAPI }> = ({ serverAPI }) => {
   return (
-    <PanelSection title="Panel Section">
+    <PanelSection title={Translator.translate("panel.section")}>
       <PanelSectionRow>
         <ButtonItem
           layout="below"
           onClick={(e) =>
             showContextMenu(
-              <Menu label="Menu" cancelText="CAAAANCEL" onCancel={() => { }}>
-                <MenuItem onSelected={() => { }}>Item #1</MenuItem>
-                <MenuItem onSelected={() => { }}>Item #2</MenuItem>
-                <MenuItem onSelected={() => { }}>Item #3</MenuItem>
-                <MenuItem onSelected={() => { }}>Item #4</MenuItem>
+              <Menu label="Menu" cancelText={Translator.translate("cancel")} onCancel={() => { }}>
+                <MenuItem onSelected={() => { }}>{Translator.translate("item.#", { id: 1 })}</MenuItem>
+                <MenuItem onSelected={() => { }}>{Translator.translate("item.#", { id: 2 })}</MenuItem>
+                <MenuItem onSelected={() => { }}>{Translator.translate("item.#", { id: 3 })}</MenuItem>
+                <MenuItem onSelected={() => { }}>{Translator.translate("item.#", { id: 4 })}</MenuItem>
               </Menu>,
               e.currentTarget ?? window
             )
           }
         >
-          Server says yolo
+          {Translator.translate("server.says.yolo")}
         </ButtonItem>
       </PanelSectionRow>
 
@@ -38,11 +40,11 @@ export const MainMenu: VFC<{ serverAPI: ServerAPI }> = ({ serverAPI }) => {
             Navigation.CloseSideMenus();
             Navigation.Navigate("/decky-plugin-test");
             serverAPI.callPluginMethod("add", { left: 1, right: 2 }).then((e) => {
-              console.log("Resultado de add: " + e.result);
+              Logger.info("1+2=" + e.result);
             })
           }}
         >
-          Router
+          {Translator.translate("router")}
         </ButtonItem>
       </PanelSectionRow>
     </PanelSection>

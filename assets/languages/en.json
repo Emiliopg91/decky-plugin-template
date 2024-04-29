@@ -1,0 +1,9 @@
+{
+    "server.says.yolo": "Server says yolo",
+    "item.#": "Item #{{id}}",
+    "router": "Router",
+    "cancel": "Cancel",
+    "panel.section": "Panel section",
+    "go.to.library": "Go to library",
+    "hello.world": "Hello world!"
+}

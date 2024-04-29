@@ -1,12 +1,13 @@
 import { DialogButton, Navigation } from "decky-frontend-lib";
 import { VFC } from "react";
+import { Translator } from "../libraries/translator";
 
 export const RouterTest: VFC = () => {
     return (
       <div style={{ marginTop: "50px", color: "white" }}>
-        Hello World!
+        {Translator.translate("hello.world")}
         <DialogButton onClick={() => Navigation.NavigateToLibraryTab()}>
-          Go to Library
+          {Translator.translate("go.to.library")}
         </DialogButton>
       </div>
     );

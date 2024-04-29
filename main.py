@@ -4,37 +4,43 @@ import os
 # For easy intellisense checkout the decky-loader code one directory up
 # or add the `decky-loader/plugin` path to `python.analysis.extraPaths` in `.vscode/settings.json`
 import decky_plugin
+import plugin_config
+import logger_utils
 
 class Plugin:
     # A normal method. It can be called from JavaScript using call_plugin_function("method_1", argument1, argument2)
     async def add(self, left, right):
         return left + right
+    
+# Configuration
 
-    # Asyncio-compatible long-running code, executed in a task when the plugin is loaded
+    async def get_config(self):
+        decky_plugin.logger.debug("Executing: get_config()")
+        return plugin_config.get_config()
+
+    async def set_config(self, key: str, value: str):
+        decky_plugin.logger.debug("Executing: set_config(%s, %s)", key, value)
+        plugin_config.set_config(key, value)
+
+# Logger
+
+    async def log(self, level: str, msg: str) -> int:
+        decky_plugin.logger.debug("Executing: log()")
+        return logger_utils.log(level, msg)
+
+    async def get_plugin_log(self) -> str:
+        decky_plugin.logger.debug("Executing: get_plugin_log()")
+        return logger_utils.get_plugin_log()
+    
+# Lifecycle
+
     async def _main(self):
-        decky_plugin.logger.info("Hello World!")
+        logger_utils.configure_logger()
+        decky_plugin.logger.info("Running "+decky_plugin.DECKY_PLUGIN_NAME)
 
-    # Function called first during the unload process, utilize this to handle your plugin being removed
     async def _unload(self):
-        decky_plugin.logger.info("Goodbye World!")
-        pass
+        decky_plugin.logger.info("Unloading "+decky_plugin.DECKY_PLUGIN_NAME)
 
-    # Migrations that should be performed before entering `_main()`.
     async def _migration(self):
-        decky_plugin.logger.info("Migrating")
-        # Here's a migration example for logs:
-        # - `~/.config/decky-template/template.log` will be migrated to `decky_plugin.DECKY_PLUGIN_LOG_DIR/template.log`
-        decky_plugin.migrate_logs(os.path.join(decky_plugin.DECKY_USER_HOME,
-                                               ".config", "decky-template", "template.log"))
-        # Here's a migration example for settings:
-        # - `~/homebrew/settings/template.json` is migrated to `decky_plugin.DECKY_PLUGIN_SETTINGS_DIR/template.json`
-        # - `~/.config/decky-template/` all files and directories under this root are migrated to `decky_plugin.DECKY_PLUGIN_SETTINGS_DIR/`
-        decky_plugin.migrate_settings(
-            os.path.join(decky_plugin.DECKY_HOME, "settings", "template.json"),
-            os.path.join(decky_plugin.DECKY_USER_HOME, ".config", "decky-template"))
-        # Here's a migration example for runtime data:
-        # - `~/homebrew/template/` all files and directories under this root are migrated to `decky_plugin.DECKY_PLUGIN_RUNTIME_DIR/`
-        # - `~/.local/share/decky-template/` all files and directories under this root are migrated to `decky_plugin.DECKY_PLUGIN_RUNTIME_DIR/`
-        decky_plugin.migrate_runtime(
-            os.path.join(decky_plugin.DECKY_HOME, "template"),
-            os.path.join(decky_plugin.DECKY_USER_HOME, ".local", "share", "decky-template"))
+        decky_plugin.logger.info("Migrating plugin configuration")
+        plugin_config.migrate()
