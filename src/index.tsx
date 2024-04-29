@@ -7,13 +7,10 @@ import { FaShip } from "react-icons/fa";
 import { MainMenu } from "./pages/MainMenu"
 import { RouterTest } from "./pages/RouterTest"
 import { Constants } from "./utils/constants";
-import { Framework } from "./libraries/framework";
 
 import spanish from "../assets/languages/es.json";
 import english from "../assets/languages/en.json";
-import { Language } from "./libraries/translator";
-import { Configuration } from "./libraries/configuration";
-import { Logger } from "./libraries/logger";
+import { Configuration, Framework, Logger, Language } from "decky-plugin-framework";
 
 
 export default definePlugin((serverApi: ServerAPI) => {
@@ -26,16 +23,16 @@ export default definePlugin((serverApi: ServerAPI) => {
     Logger.info(Configuration.getEntry<Config>("time"));
   })()
 
-  serverApi.routerHook.addRoute("/decky-plugin-test", RouterTest, {
+  serverApi.routerHook.addRoute(Constants.ROUTE_DECKY_PLUGIN_TEST, RouterTest, {
     exact: true,
   });
 
   return {
     title: <div className={staticClasses.Title}>{Constants.PLUGIN_NAME}</div>,
-    content: <MainMenu serverAPI={serverApi} />,
+    content: <MainMenu />,
     icon: <FaShip />,
     onDismount() {
-      serverApi.routerHook.removeRoute("/decky-plugin-test");
+      serverApi.routerHook.removeRoute(Constants.ROUTE_DECKY_PLUGIN_TEST);
     },
   };
 });

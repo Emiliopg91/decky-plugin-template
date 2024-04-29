@@ -18,6 +18,9 @@ devDependencies:
   '@rollup/plugin-replace':
     specifier: ^4.0.0
     version: 4.0.0(rollup@2.79.1)
+  '@rollup/plugin-terser':
+    specifier: ^0.4.4
+    version: 0.4.4(rollup@2.79.1)
   '@rollup/plugin-typescript':
     specifier: ^8.5.0
     version: 8.5.0(rollup@2.79.1)(tslib@2.6.2)(typescript@4.9.5)
@@ -30,6 +33,9 @@ devDependencies:
   decky-frontend-lib:
     specifier: ^3.25.0
     version: 3.25.0
+  decky-plugin-framework:
+    specifier: ^1.0.0
+    version: 1.0.0
   rollup:
     specifier: ^2.79.1
     version: 2.79.1
@@ -137,6 +143,21 @@ packages:
       '@rollup/pluginutils': 3.1.0(rollup@2.79.1)
       magic-string: 0.25.9
       rollup: 2.79.1
+    dev: true
+
+  /@rollup/plugin-terser@0.4.4(rollup@2.79.1):
+    resolution: {integrity: sha512-XHeJC5Bgvs8LfukDwWZp7yeqin6ns8RTl2B9avbejt6tZqsqvVoWI7ZTQrcNsfKEDWBTnTxM8nMDkO2IFFbd0A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 2.79.1
+      serialize-javascript: 6.0.1
+      smob: 1.5.0
+      terser: 5.17.6
     dev: true
 
   /@rollup/plugin-typescript@8.5.0(rollup@2.79.1)(tslib@2.6.2)(typescript@4.9.5):
@@ -434,6 +455,14 @@ packages:
     resolution: {integrity: sha512-2lBoHS2AIRmuluq/bGdHBz+uyToQE7k3K/vDq1MQbDZ4eC+8CGDuh2T8yZOj3D0yjGP2MdikNNAWPA9Z5l2qDg==}
     dev: true
 
+  /decky-plugin-framework@1.0.0:
+    resolution: {integrity: sha512-cksazyNIQ+H3N7bopFDqSOaYjmLoKs4xCc9z1ZMMNftMoI/xMm7SlEYzJzAThw5MmljyME8oLK1yybAr2c/vOg==}
+    dependencies:
+      react-icons: 4.12.0
+    transitivePeerDependencies:
+      - react
+    dev: true
+
   /deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
     engines: {node: '>=0.10.0'}
@@ -700,7 +729,6 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
-    dev: false
 
   /rechoir@0.6.2:
     resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==}
@@ -778,6 +806,10 @@ packages:
     dependencies:
       minimist: 1.2.8
       shelljs: 0.8.5
+    dev: true
+
+  /smob@1.5.0:
+    resolution: {integrity: sha512-g6T+p7QO8npa+/hNx9ohv1E5pVCmWrVCUzUXJyLdMmftX6ER0oiWY/w9knEonLpnOp6b6FenKnMfR8gqwWdwig==}
     dev: true
 
   /source-map-support@0.5.21:

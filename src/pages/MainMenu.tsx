@@ -1,11 +1,12 @@
-import { ButtonItem, Menu, MenuItem, Navigation, PanelSection, PanelSectionRow, ServerAPI, showContextMenu } from "decky-frontend-lib"
+import { ButtonItem, Menu, MenuItem, Navigation, PanelSection, PanelSectionRow, showContextMenu } from "decky-frontend-lib"
 import { VFC } from "react"
 
 import logo from "../../assets/logo.png"
-import { Logger } from "../libraries/logger";
-import { Translator } from "../libraries/translator";
+import { Logger, Translator } from "decky-plugin-framework";
+import { Constants } from "../utils/constants";
+import { BackendUtils } from "../utils/backend";
 
-export const MainMenu: VFC<{ serverAPI: ServerAPI }> = ({ serverAPI }) => {
+export const MainMenu: VFC = () => {
   return (
     <PanelSection title={Translator.translate("panel.section")}>
       <PanelSectionRow>
@@ -38,9 +39,9 @@ export const MainMenu: VFC<{ serverAPI: ServerAPI }> = ({ serverAPI }) => {
           layout="below"
           onClick={() => {
             Navigation.CloseSideMenus();
-            Navigation.Navigate("/decky-plugin-test");
-            serverAPI.callPluginMethod("add", { left: 1, right: 2 }).then((e) => {
-              Logger.info("1+2=" + e.result);
+            Navigation.Navigate(Constants.ROUTE_DECKY_PLUGIN_TEST);
+            BackendUtils.add(1, 2).then((e) => {
+              Logger.info("1+2=" + e);
             })
           }}
         >

@@ -1,6 +1,6 @@
 import { DialogButton, Navigation } from "decky-frontend-lib";
 import { VFC } from "react";
-import { Translator } from "../libraries/translator";
+import { Translator } from "decky-plugin-framework";
 
 export const RouterTest: VFC = () => {
     return (

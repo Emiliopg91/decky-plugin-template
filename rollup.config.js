@@ -31,13 +31,17 @@ const outputConfig = {
   exports: 'default',
 }
 
+const jsonConfig = {
+  compact: true
+}
+
 export default defineConfig({
   input: './src/index.tsx',
   plugins: [
     commonjs(),
     nodeResolve(),
     typescript(),
-    json(),
+    json(jsonConfig),
     replace(replaceConfig),
     importAssets(importConfig)
   ],

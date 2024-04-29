@@ -33,9 +33,10 @@
     "@rollup/plugin-typescript": "^8.5.0",
     "@types/react": "16.14.0",
     "@types/webpack": "^5.28.5",
-    "rollup-plugin-import-assets": "^1.1.1",
     "decky-frontend-lib": "^3.25.0",
+    "decky-plugin-framework": "^1.0.0",
     "rollup": "^2.79.1",
+    "rollup-plugin-import-assets": "^1.1.1",
     "shx": "^0.3.4",
     "tslib": "^2.6.2",
     "typescript": "^4.9.5"
@@ -50,6 +51,12 @@
         "react-dom",
         "decky-frontend-lib"
       ]
+    }
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module",
+      "parser": "typescript"
     }
   }
 }
