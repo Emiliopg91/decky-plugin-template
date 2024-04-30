@@ -1,13 +1,13 @@
 import os
 from pathlib import Path
 import decky_plugin
-import logging
+import json
 
 # Plugin directories and files
 plugin_dir = Path(decky_plugin.DECKY_PLUGIN_DIR)
 config_dir = Path(decky_plugin.DECKY_PLUGIN_SETTINGS_DIR)
 
-cfg_property_file = config_dir / "plugin.properties"
+cfg_property_file = config_dir / "plugin.json"
 
 def get_config(): 
     """
@@ -16,11 +16,8 @@ def get_config():
     Returns:
     list: A list of key-value pairs representing the configuration.
     """
-    with open(cfg_property_file) as f:
-        lines = f.readlines()
-        lines = list(map(lambda x: x.strip().split('='), lines))
-        decky_plugin.logger.debug("config %s", lines)
-        return lines
+    with open(cfg_property_file, "r") as jsonFile:
+        return json.load(jsonFile)
 
 def set_config(key: str, value: str):
     """
@@ -30,18 +27,14 @@ def set_config(key: str, value: str):
     key (str): The key to set.
     value (str): The value to set for the key.
     """
-    with open(cfg_property_file, "r") as f:
-        lines = f.readlines()
+    with open(cfg_property_file, "r") as jsonFile:
+        data = json.load(jsonFile)
     with open(cfg_property_file, "w") as f:
-        found = False
-        for line in lines:
-            if line.startswith(key + '='):
-                f.write(f"{key}={value}\n")
-                found = True
-            else:
-                f.write(line)
-        if not found:
-            f.write(f"{key}={value}\n")
+        data[key] = value
+        json_object = json.dumps(data, indent=4)
+        with open(cfg_property_file, "w") as outfile:
+            outfile.write(json_object)
+
 
 def get_config_item(name: str, default: str = None):
     """
@@ -54,7 +47,12 @@ def get_config_item(name: str, default: str = None):
     Returns:
     str: The value of the configuration item.
     """
-    return next((x[1] for x in get_config() if x[0] == name), default)
+    with open(cfg_property_file, "r") as jsonFile:
+        data = json.load(jsonFile)
+        if "percentage" in data:
+            return data[name]
+        else:
+            return default
 
 def migrate():
     """
@@ -64,3 +62,9 @@ def migrate():
         os.makedirs(config_dir, exist_ok=True)
     if not cfg_property_file.is_file():
         cfg_property_file.touch()
+        dictionary = {
+            "log_level": "INFO"
+        }
+        json_object = json.dumps(dictionary, indent=4)
+        with open(cfg_property_file, "w") as outfile:
+            outfile.write(json_object)

@@ -13,6 +13,11 @@ declare module "*.jpg" {
   export default content;
 }
 
+declare module "*.i18n.json" {
+  const content: Record<string, Record<string, string>>;
+  export default content;
+}
+
 declare module "*.json" {
   const content: Record<string, string>;
   export default content;

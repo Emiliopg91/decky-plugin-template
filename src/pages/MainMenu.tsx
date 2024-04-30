@@ -2,13 +2,18 @@ import { ButtonItem, Menu, MenuItem, Navigation, PanelSection, PanelSectionRow, 
 import { VFC } from "react"
 
 import logo from "../../assets/logo.png"
-import { Logger, Translator } from "decky-plugin-framework";
+import { Logger, System, Translator } from "decky-plugin-framework";
 import { Constants } from "../utils/constants";
 import { BackendUtils } from "../utils/backend";
 
 export const MainMenu: VFC = () => {
   return (
     <PanelSection title={Translator.translate("panel.section")}>
+
+      <PanelSectionRow>
+        <h2>{System.getCurrentUser()}, {Translator.translate("hello.world")}</h2>
+      </PanelSectionRow>
+
       <PanelSectionRow>
         <ButtonItem
           layout="below"

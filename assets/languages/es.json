@@ -1,9 +1,0 @@
-{
-    "server.says.yolo": "Servidor dice hola",
-    "item.#": "Elemento #{{id}}",
-    "router": "Enrutador",
-    "cancel": "Cancelar",
-    "panel.section": "Seccion de panel",
-    "go.to.library": "Ir a biblioteca",
-    "hello.world": "¡Hola mundo!"
-}

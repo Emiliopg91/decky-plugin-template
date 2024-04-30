@@ -34,8 +34,8 @@ devDependencies:
     specifier: ^3.25.0
     version: 3.25.0
   decky-plugin-framework:
-    specifier: ^1.0.0
-    version: 1.0.0
+    specifier: ^1.2.1
+    version: 1.2.1
   rollup:
     specifier: ^2.79.1
     version: 2.79.1
@@ -455,8 +455,8 @@ packages:
     resolution: {integrity: sha512-2lBoHS2AIRmuluq/bGdHBz+uyToQE7k3K/vDq1MQbDZ4eC+8CGDuh2T8yZOj3D0yjGP2MdikNNAWPA9Z5l2qDg==}
     dev: true
 
-  /decky-plugin-framework@1.0.0:
-    resolution: {integrity: sha512-cksazyNIQ+H3N7bopFDqSOaYjmLoKs4xCc9z1ZMMNftMoI/xMm7SlEYzJzAThw5MmljyME8oLK1yybAr2c/vOg==}
+  /decky-plugin-framework@1.2.1:
+    resolution: {integrity: sha512-kR/QhhgxrjSYU+xlpEB4sPGq4zuIvJ9ZYZQZfZWF7apZsPRIHxpqbkmQBtLvglhFkc0v7Y18BE7VFY5DVgdvNg==}
     dependencies:
       react-icons: 4.12.0
     transitivePeerDependencies:
